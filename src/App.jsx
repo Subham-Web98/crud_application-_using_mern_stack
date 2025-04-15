@@ -13,7 +13,8 @@ const App = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
-  const databaseURL = `http://localhost:8000/api/users`;
+  const databaseURL = `crud-app-backend-express-and-mongo-db.vercel.app
+`;
 
   const updateUser = (user) => {
     setName(user.name);
