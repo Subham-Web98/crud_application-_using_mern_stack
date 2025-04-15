@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  font-family: sans-serif;
+}
+.user-form {
+  min-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.users-list-table {
+  background-color: rgba(210, 210, 210, 0.248);
+  border-radius: 20px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f2f2f2;
+}
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+@media (200px < width < 600px) {
+  .user-form {
+    min-width: 200px;
+    margin: 20px auto;
+  }
+}
