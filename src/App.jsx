@@ -13,7 +13,7 @@ const App = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
-  const databaseURL = `https://crud-app-backend-express-and-mongodb.onrender.com`;
+  const databaseURL = `https://crud-app-backend-express-and-mongodb.onrender.com/api/users`;
 
   const updateUser = (user) => {
     setName(user.name);
