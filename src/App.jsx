@@ -12,6 +12,8 @@ const App = () => {
   const [usersList, setUsersList] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
 
   const databaseURL = `https://crud-app-backend-express-and-mongodb.onrender.com/api/users`;
 
@@ -60,10 +62,13 @@ const App = () => {
   //* All Users List - get
   const allUsers = async () => {
     try {
+      setLoading(true);
       const users = await axios.get(`${databaseURL}/users-view`);
       setUsersList(users.data.data);
     } catch (error) {
       console.log(`Somthig went wrong :${error}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,7 +98,6 @@ const App = () => {
       toast.error("Failed to delete, try again!");
     }
   };
-
 
   //* Delete All Users
 
@@ -219,14 +223,22 @@ const App = () => {
               </tr>
             </thead>
             <tbody>
-              {usersList.length > 0 ? (
+              {loading ? (
+                <tr>
+                  <td colSpan="7" className="text-center py-5">
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </td>
+                </tr>
+              ) : usersList.length > 0 ? (
                 usersList.map((user, index) => (
-                  <tr key={index} className="">
+                  <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>+91 {user.phone}</td>
-                    <td> {user.message}</td>
+                    <td>{user.message}</td>
                     <td>
                       <button
                         onClick={() => updateUser(user)}
@@ -237,7 +249,6 @@ const App = () => {
                     </td>
                     <td>
                       <button
-                        type="button"
                         onClick={() => deleteUser(user._id)}
                         className="btn btn-outline-danger btn-sm"
                       >
@@ -247,8 +258,11 @@ const App = () => {
                   </tr>
                 ))
               ) : (
-                <tr className="text-center fs-4 fw-bold text-danger">
-                  <td colSpan="7" className="text-center text-danger my-5 py-5">
+                <tr>
+                  <td
+                    colSpan="7"
+                    className="text-center text-danger fs-4 fw-bold py-5"
+                  >
                     No User Found
                   </td>
                 </tr>
